@@ -2,6 +2,11 @@ description: >
   This job bumps the version of your Node project and uploads a build artifact to your specified NPM registry.
 
 parameters:
+  dry_run: 
+    type: boolean
+    default: false
+    description: >
+      This parameters indicates that you don't want npm to make any changes and that it should only report what it would have done.
   git_user_email:
     type: string
     default: "not@an.email"
@@ -57,6 +62,7 @@ steps:
   - run:
       name: Bump project version and upload artifact
       environment:
+        DRY_RUN: << paramaters.dry_run >>
         NPM_REGISTRY: << parameters.npm_registry >>
         NPM_REGISTRY_AUTH: << parameters.npm_registry_auth >>
         NPM_REGISTRY_EMAIL: << parameters.npm_registry_email >>

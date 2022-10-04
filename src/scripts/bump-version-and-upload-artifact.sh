@@ -20,13 +20,17 @@ bump_type=$(get_bump_type)
 
 if [[ -n "$bump_type" ]]; then
   npm version "$bump_type" -m "[skip ci] Upgrade to %s"
-  git push && git push --tags
-  {
+  npm shrinkwrap && npm ci
+  { 
+    echo always-auth=true
     echo _auth="$NPM_REGISTRY_AUTH"
     echo email="$NPM_REGISTRY_EMAIL"
     echo registry="$NPM_REGISTRY"
   } >> .npmrc
-  npm shrinkwrap
-  npm ci
-  npm publish
+  if [[ "$DRY_RUN" = true ]]; then
+    npm publish --dry-run
+  else
+    git push && git push --tags
+    npm publish
+  fi
 fi
