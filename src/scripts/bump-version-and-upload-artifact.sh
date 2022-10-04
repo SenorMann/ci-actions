@@ -28,6 +28,7 @@ if [[ -n "$bump_type" ]]; then
     echo registry="$NPM_REGISTRY"
   } >> .npmrc
   if [[ "$DRY_RUN" = true ]]; then
+    echo "HEYYYY"
     npm publish --dry-run
   else
     git push && git push --tags
