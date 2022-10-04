@@ -1,0 +1,63 @@
+description: >
+  This job bumps the version of your Node project and uploads a build artifact to your specified NPM registry.
+
+parameters:
+  git_user_email:
+    type: string
+    default: "not@an.email"
+    description: >
+      The email for the git account that performs the commit and tags from bumping version.
+
+  git_user_name:
+    type: string
+    default: "circleci"
+    description: >
+      The username for the git account that performs the commit and tags from bumping version.
+
+  npm_registry:
+    type: string
+    description: >
+      The NPM registry to upload your build artifact to.
+
+  npm_registry_auth:
+    type: string
+    description: >
+      The authentication token for the specified NPM registry account
+
+  npm_registry_email:
+    type: string
+    description: >
+      The email address for the specified NPM registry account.
+
+  node_version:
+    type: string
+    default: "lts"
+    description: >
+      Pick a specific cimg/node image version tag: https://hub.docker.com/r/cimg/node. Defaults to current LTS.
+
+executor:
+  name: default
+  parameters:
+    tag: << parameters.node_version >>
+
+steps:
+  - checkout
+  - run:
+      name: Check files
+      command: ls -al
+  - run:
+      name: Check version to publish
+      command: npm pkg get version
+  - run:
+      name: Configure git username and email
+      environment:
+        GIT_USER_EMAIL: << paramaters.git_user_email >>
+        GIT_USER_NAME: << paramaters.git_user_name >>
+      command: <<include(scripts/configure-git.sh)>>
+  - run:
+      name: Bump project version and upload artifact
+      environment:
+        NPM_REGISTRY: << parameters.npm_registry >>
+        NPM_REGISTRY_AUTH: << parameters.npm_registry_auth >>
+        NPM_REGISTRY_EMAIL: << parameters.npm_registry_email >>
+      command: <<include(scripts/bump-version-and-upload-artifact.sh)>>
