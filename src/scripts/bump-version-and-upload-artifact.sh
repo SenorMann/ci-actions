@@ -15,6 +15,8 @@ get_bump_type() {
   fi
 }
 
+$NPM_REGISTRY=$(eval echo "\$$NPM_REGISTRY")
+
 
 bump_type=$(get_bump_type)
 
@@ -30,14 +32,8 @@ if [[ -n "$bump_type" ]]; then
     echo email="$NPM_REGISTRY_EMAIL"
     echo registry="$NPM_REGISTRY"
   } >> .npmrc
-  echo "NPMRC"
-  cat .npmrc
-  echo "END NPMRC"
-  echo "DRY RUN"
-  echo "$DRY_RUN"
-  echo "END DRY RUN"
+ 
   if [[ "$DRY_RUN" == "1" ]]; then
-    echo "HEYYYY"
     npm publish --dry-run
   else
     git push && git push --tags
