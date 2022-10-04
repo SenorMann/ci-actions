@@ -36,7 +36,7 @@ if [[ -n "$bump_type" ]]; then
   echo "DRY RUN"
   echo "$DRY_RUN"
   echo "END DRY RUN"
-  if [[ "$DRY_RUN" == "true" ]]; then
+  if [[ "$DRY_RUN" == "1" ]]; then
     echo "HEYYYY"
     npm publish --dry-run
   else

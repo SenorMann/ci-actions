@@ -25,6 +25,7 @@ workflows:
           filters: *filters
       - ci-actions/bump-version-and-upload-artifact:
           app-dir: "~/project/samples/node-app"
+          context: orb-publishing
           dry_run: true
           filters: *filters
       - orb-tools/pack:
