@@ -27,11 +27,6 @@ workflows:
           app-dir: "~/project/samples/node-app"
           dry_run: true
           filters: *filters
-          git_user_email: $GIT_USER_EMAIL
-          git_user_name: $GIT_USER_NAME
-          npm_registry: $NPM_REGISTRY
-          npm_registry_auth: $NPM_REGISTRY_AUTH
-          npm_registry_email: $NPM_REGISTRY_EMAIL
       - orb-tools/pack:
           filters: *filters
       - orb-tools/publish:

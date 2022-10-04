@@ -27,9 +27,13 @@ if [[ -n "$bump_type" ]]; then
     echo email="$NPM_REGISTRY_EMAIL"
     echo registry="$NPM_REGISTRY"
   } >> .npmrc
+  echo "NPMRC"
   cat .npmrc
+  echo "END NPMRC"
+  echo "DRY RUN"
   echo "$DRY_RUN"
-  if [[ "$DRY_RUN" == true ]]; then
+  echo "END DRY RUN"
+  if [[ "$DRY_RUN" == "true" ]]; then
     echo "HEYYYY"
     npm publish --dry-run
   else

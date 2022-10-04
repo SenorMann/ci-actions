@@ -12,29 +12,32 @@ parameters:
     description: >
       This parameters indicates that you don't want npm to make any changes and that it should only report what it would have done.
   git_user_email:
-    type: string
-    default: not@an.email
+    type: env_var_name
+    default: GIT_USER_EMAIL
     description: >
       The email for the git account that performs the commit and tags from bumping version.
 
   git_user_name:
-    type: string
-    default: circleci
+    type: env_var_name
+    default: GIT_USER_NAME
     description: >
       The username for the git account that performs the commit and tags from bumping version.
 
   npm_registry:
-    type: string
+    type: env_var_name
+    default: NPM_REGISTRY
     description: >
       The NPM registry to upload your build artifact to.
 
   npm_registry_auth:
-    type: string
+    type: env_var_name
+    default: NPM_REGISTRY_AUTH
     description: >
       The authentication token for the specified NPM registry account
 
   npm_registry_email:
-    type: string
+    type: env_var_name
+    default: NPM_REGISTRY_EMAIL
     description: >
       The email address for the specified NPM registry account.
 
