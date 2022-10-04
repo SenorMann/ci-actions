@@ -54,9 +54,6 @@ steps:
       name: Check files
       command: ls -al
   - run:
-      name: Check version to publish
-      command: npm pkg get version
-  - run:
       name: Configure git username and email
       environment:
         GIT_USER_EMAIL: << parameters.git_user_email >>
