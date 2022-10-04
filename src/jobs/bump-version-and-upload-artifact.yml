@@ -2,20 +2,20 @@ description: >
   This job bumps the version of your Node project and uploads a build artifact to your specified NPM registry.
 
 parameters:
-  dry_run: 
+  dry_run:
     type: boolean
     default: false
     description: >
       This parameters indicates that you don't want npm to make any changes and that it should only report what it would have done.
   git_user_email:
     type: string
-    default: "not@an.email"
+    default: not@an.email
     description: >
       The email for the git account that performs the commit and tags from bumping version.
 
   git_user_name:
     type: string
-    default: "circleci"
+    default: circleci
     description: >
       The username for the git account that performs the commit and tags from bumping version.
 
@@ -36,7 +36,7 @@ parameters:
 
   node_version:
     type: string
-    default: "lts"
+    default: lts
     description: >
       Pick a specific cimg/node image version tag: https://hub.docker.com/r/cimg/node. Defaults to current LTS.
 
@@ -56,13 +56,13 @@ steps:
   - run:
       name: Configure git username and email
       environment:
-        GIT_USER_EMAIL: << paramaters.git_user_email >>
-        GIT_USER_NAME: << paramaters.git_user_name >>
+        GIT_USER_EMAIL: << parameters.git_user_email >>
+        GIT_USER_NAME: << parameters.git_user_name >>
       command: <<include(scripts/configure-git.sh)>>
   - run:
       name: Bump project version and upload artifact
       environment:
-        DRY_RUN: << paramaters.dry_run >>
+        DRY_RUN: << parameters.dry_run >>
         NPM_REGISTRY: << parameters.npm_registry >>
         NPM_REGISTRY_AUTH: << parameters.npm_registry_auth >>
         NPM_REGISTRY_EMAIL: << parameters.npm_registry_email >>
