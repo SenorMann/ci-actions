@@ -47,9 +47,24 @@ parameters:
     description: >
       Pick a specific cimg/node image version tag: https://hub.docker.com/r/cimg/node. Defaults to current LTS.
 
-executor:
-  name: default
-  tag: << parameters.node_version >>
 
 steps:
-  - bump
+  - checkout
+  - run:
+      name: Check files
+      command: ls -al
+  - run:
+      name: Configure git username and email
+      environment:
+        GIT_USER_EMAIL: << parameters.git_user_email >>
+        GIT_USER_NAME: << parameters.git_user_name >>
+      command: <<include(scripts/configure-git.sh)>>
+  - run:
+      name: Bump project version and upload artifact
+      working_directory: << parameters.app-dir >>
+      environment:
+        DRY_RUN: << parameters.dry_run >>
+        NPM_REGISTRY: << parameters.npm_registry >>
+        NPM_REGISTRY_AUTH: << parameters.npm_registry_auth >>
+        NPM_REGISTRY_EMAIL: << parameters.npm_registry_email >>
+      command: <<include(scripts/bump-version-and-upload-artifact.sh)>>
