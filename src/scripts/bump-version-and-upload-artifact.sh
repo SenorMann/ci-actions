@@ -1,4 +1,8 @@
 #!/bin/bash
+if cat /etc/issue | grep "Alpine" >/dev/null 2>&1; then
+    . $BASH_ENV
+fi
+
 
 shopt -s nocasematch
 
