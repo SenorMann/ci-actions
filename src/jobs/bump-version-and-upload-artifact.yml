@@ -2,6 +2,10 @@ description: >
   This job bumps the version of your Node project and uploads a build artifact to your specified NPM registry.
 
 parameters:
+  app-dir:
+    type: string
+    default: "~/project"
+    description: Path to the directory containing your package.json file. Not needed if package.json lives in the root.
   dry_run:
     type: boolean
     default: false
@@ -66,3 +70,4 @@ steps:
         NPM_REGISTRY_AUTH: << parameters.npm_registry_auth >>
         NPM_REGISTRY_EMAIL: << parameters.npm_registry_email >>
       command: <<include(scripts/bump-version-and-upload-artifact.sh)>>
+      working_directory: << parameters.app-dir >>
