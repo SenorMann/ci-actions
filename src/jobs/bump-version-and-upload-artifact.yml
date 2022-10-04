@@ -42,8 +42,7 @@ parameters:
 
 executor:
   name: default
-  parameters:
-    tag: << parameters.node_version >>
+  tag: << parameters.node_version >>
 
 steps:
   - checkout
