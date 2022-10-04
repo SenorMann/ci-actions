@@ -22,7 +22,7 @@ bump_type=$(get_bump_type)
 
 if [[ -n "$bump_type" ]]; then
   echo "ENV VARSSS"
-  echo "$NPM_REGISTRY"
+  echo "${NPM_REGISTRY}"
   echo "END ECHO"
   npm version "$bump_type" -m "[skip ci] Upgrade to %s"
   npm shrinkwrap && npm ci
