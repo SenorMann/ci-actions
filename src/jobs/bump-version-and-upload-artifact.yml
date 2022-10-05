@@ -75,7 +75,6 @@ steps:
 
         shopt -s nocasematch
 
-        . $BASH_ENV
 
         echo $BASH_ENV
 
