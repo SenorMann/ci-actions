@@ -2,8 +2,6 @@
 
 shopt -s nocasematch
 
-. $BASH_ENV
-
 echo $BASH_ENV
 
 get_bump_type() {
