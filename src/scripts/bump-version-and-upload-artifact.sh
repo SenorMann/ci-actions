@@ -2,6 +2,10 @@
 
 shopt -s nocasematch
 
+. $BASH_ENV
+
+echo $BASH_ENV
+
 get_bump_type() {
   commit_msg=$(git log -1 --pretty=%B)
   if [[ "$commit_msg" =~ .*"[skip ci] Upgrade to ".* ]]; then
