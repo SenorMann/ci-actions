@@ -79,4 +79,8 @@ steps:
         NPM_REGISTRY: ${NPM_REGISTRY}
         NPM_REGISTRY_AUTH: ${<< parameters.npm_registry_auth >>}
         NPM_REGISTRY_EMAIL: << parameters.npm_registry_email >>
-      command: <<include(scripts/bump-version-and-upload-artifact.sh)>>
+      # command: <<include(scripts/bump-version-and-upload-artifact.sh)>>
+      command: |
+        REGISTRY=${<< parameters.npm_registry >>}
+        echo $REGISTRY
+        echo << parameters.npm_registry >>
