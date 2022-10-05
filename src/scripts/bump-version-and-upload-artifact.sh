@@ -22,7 +22,7 @@ bump_type=$(get_bump_type)
 
 if [[ -n "$bump_type" ]]; then
   echo "ENV VARSSS"
-  echo "$NPM_REGISTRY"
+  echo "\$$NPM_REGISTRY"
   echo "_+_________++++++++++"
   echo "${D_NPM_REGISTRY}"
   echo "END ECHO"
