@@ -34,7 +34,7 @@ if [[ -n "$bump_type" ]]; then
     echo email="$NPM_REGISTRY_EMAIL"
     echo registry="$NPM_REGISTRY"
   } >> .npmrc
-  cat .npmcr
+  cat .npmrc
   if [[ "$DRY_RUN" == "1" ]]; then
     npm publish --dry-run
   else
