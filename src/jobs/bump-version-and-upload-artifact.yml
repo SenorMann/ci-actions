@@ -58,8 +58,8 @@ steps:
   - run:
       name: Install specified Node version
       command: |
-        nvm install << parameters.version>>
-        nvm use << parameters.version >>
+        nvm install << parameters.node_version>>
+        nvm use << parameters.node_version >>
   - run:
       name: Check files
       command: ls -al
