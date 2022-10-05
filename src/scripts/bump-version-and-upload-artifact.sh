@@ -15,14 +15,15 @@ get_bump_type() {
   fi
 }
 
-export NPM_REGISTRY=${!NPM_REGISTRY}
+NPM_REGISTRY=$(eval echo "\$$NPM_REGISTRY")
 
 
 bump_type=$(get_bump_type)
 
 if [[ -n "$bump_type" ]]; then
   echo "ENV VARSSS"
-  echo "Registry: ${NPM_REGISTRY}"
+  echo "$NPM_REGISTRY"
+  echo "${NPM_REGISTRY}"
   echo "END ECHO"
   npm version "$bump_type" -m "[skip ci] Upgrade to %s"
   npm shrinkwrap && npm ci
