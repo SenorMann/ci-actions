@@ -63,9 +63,6 @@ steps:
         GIT_USER_NAME: << parameters.git_user_name >>
       command: <<include(scripts/configure-git.sh)>>
   - run:
-      name: "Setup custom environment variables"
-      command: echo 'export NPM_REGISTRY=<<parameters.npm_registry>> >> "$BASH_ENV"
-  - run:
       name: Bump project version and upload artifact
       working_directory: << parameters.app-dir >>
       environment:
