@@ -49,16 +49,17 @@ parameters:
 
 executor:
   name: default
-  tag: << parameters.node_version >>
-
-environment:
-  DRY_RUN: << parameters.dry_run >>
-  NPM_REGISTRY: << parameters.npm_registry >>
-  NPM_REGISTRY_AUTH: << parameters.npm_registry_auth >>
-  NPM_REGISTRY_EMAIL: << parameters.npm_registry_email >>
 
 steps:
   - checkout
+  - run:
+      name: Install NVM
+      command: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+  - run:
+      name: Install specified Node version
+      command: |
+        nvm install << parameters.version>>
+        nvm use << parameters.version >>
   - run:
       name: Check files
       command: ls -al
@@ -71,4 +72,9 @@ steps:
   - run:
       name: Bump project version and upload artifact
       working_directory: << parameters.app-dir >>
+      environment:
+        DRY_RUN: << parameters.dry_run >>
+        NPM_REGISTRY: << parameters.npm_registry >>
+        NPM_REGISTRY_AUTH: << parameters.npm_registry_auth >>
+        NPM_REGISTRY_EMAIL: << parameters.npm_registry_email >>
       command: <<include(scripts/bump-version-and-upload-artifact.sh)>>
