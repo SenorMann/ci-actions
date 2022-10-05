@@ -17,7 +17,7 @@ get_bump_type() {
   fi
 }
 
-NPM_REGISTRY=$(eval echo "\$$NPM_REGISTRY")
+export NPM_REGISTRY=${!NPM_REGISTRY}
 
 
 bump_type=$(get_bump_type)
