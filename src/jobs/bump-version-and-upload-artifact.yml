@@ -51,6 +51,12 @@ executor:
   name: default
   tag: << parameters.node_version >>
 
+environment:
+  DRY_RUN: << parameters.dry_run >>
+  NPM_REGISTRY: << parameters.npm_registry >>
+  NPM_REGISTRY_AUTH: << parameters.npm_registry_auth >>
+  NPM_REGISTRY_EMAIL: << parameters.npm_registry_email >>
+
 steps:
   - checkout
   - run:
@@ -65,9 +71,4 @@ steps:
   - run:
       name: Bump project version and upload artifact
       working_directory: << parameters.app-dir >>
-      environment:
-        DRY_RUN: << parameters.dry_run >>
-        NPM_REGISTRY: << parameters.npm_registry >>
-        NPM_REGISTRY_AUTH: << parameters.npm_registry_auth >>
-        NPM_REGISTRY_EMAIL: << parameters.npm_registry_email >>
       command: <<include(scripts/bump-version-and-upload-artifact.sh)>>
