@@ -69,7 +69,7 @@ steps:
         GIT_USER_EMAIL: << parameters.git_user_email >>
         GIT_USER_NAME: << parameters.git_user_name >>
       command: |
-        REGISTRY=${!<< parameters.npm_registry >>}
+        # REGISTRY=${!<< parameters.npm_registry >>}
         echo $REGISTRY
         echo << parameters.npm_registry >>
   - run:
