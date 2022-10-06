@@ -3,7 +3,7 @@
 EMAIL=$(eval echo \$${GIT_USER_EMAIL})
 USERNAME=$(eval echo \$${GIT_USER_NAME})
 
-git config user.email "$EMAIL"
+git config user.email "$(eval echo ${GIT_USER_NAME})"
 git config user.name "$USERNAME"
 
 git config user.email 
