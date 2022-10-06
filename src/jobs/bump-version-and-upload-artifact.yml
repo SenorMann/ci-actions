@@ -82,6 +82,7 @@ steps:
       #   NPM_REGISTRY_EMAIL: << parameters.npm_registry_email >>
       # command: <<include(scripts/bump-version-and-upload-artifact.sh)>>
       command: |
-        REGISTRY=$(eval echo "${<< parameters.npm_registry >>}")
-        echo $REGISTRY
+        echo $HOME
+        REGISTRY=${<< parameters.npm_registry >>}
+        eval echo $REGISTRY
         echo << parameters.npm_registry >>
