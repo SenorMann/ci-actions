@@ -69,18 +69,19 @@ steps:
         GIT_USER_EMAIL: << parameters.git_user_email >>
         GIT_USER_NAME: << parameters.git_user_name >>
       command: |
-        export GIT_USER_EMAIL=${!GIT_USER_EMAIL}
-        echo "$GIT_USER_EMAIL"
+        REGISTRY=${!<< parameters.npm_registry >>}
+        echo $REGISTRY
+        echo << parameters.npm_registry >>
   - run:
       name: Bump project version and upload artifact
       working_directory: << parameters.app-dir >>
-      environment:
-        DRY_RUN: << parameters.dry_run >>
-        NPM_REGISTRY: ${NPM_REGISTRY}
-        NPM_REGISTRY_AUTH: ${<< parameters.npm_registry_auth >>}
-        NPM_REGISTRY_EMAIL: << parameters.npm_registry_email >>
+      # environment:
+      #   DRY_RUN: << parameters.dry_run >>
+      #   NPM_REGISTRY: << parameters.npm_registry >>
+      #   NPM_REGISTRY_AUTH: << parameters.npm_registry_auth >>
+      #   NPM_REGISTRY_EMAIL: << parameters.npm_registry_email >>
       # command: <<include(scripts/bump-version-and-upload-artifact.sh)>>
       command: |
-        REGISTRY=${<< parameters.npm_registry >>}
+        REGISTRY=$(eval echo "${<< parameters.npm_registry >>}")
         echo $REGISTRY
         echo << parameters.npm_registry >>
