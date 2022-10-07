@@ -54,14 +54,6 @@ executor:
 steps:
   - checkout
   - run:
-      name: Install NVM
-      command: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-  - run:
-      name: Install specified Node version
-      command: |
-        nvm install << parameters.node_version>>
-        nvm use << parameters.node_version >>
-  - run:
       name: Check files
       command: ls -al
   - run:
