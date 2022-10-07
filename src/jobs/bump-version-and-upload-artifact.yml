@@ -48,7 +48,8 @@ parameters:
       Pick a specific cimg/node image version tag: https://hub.docker.com/r/cimg/node. Defaults to current LTS.
 
 executor:
-  name: default
+    name: default
+    tag: << parameters.node_version >>
 
 steps:
   - checkout
