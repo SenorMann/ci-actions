@@ -2,6 +2,11 @@
 
 shopt -s nocasematch
 
+# Read environment from provided keys
+NPM_REGISTRY=${!PARAM_NPM_REGISTRY}
+NPM_REGISTRY_AUTH=${!PARAM_NPM_REGISTRY_AUTH}
+NPM_REGISTRY_EMAIL=${!PARAM_NPM_REGISTRY_EMAIL}
+
 get_bump_type() {
   commit_msg=$(git log -1 --pretty=%B)
   if [[ "$commit_msg" =~ .*"[skip ci] Upgrade to ".* ]]; then
@@ -15,17 +20,9 @@ get_bump_type() {
   fi
 }
 
-D_NPM_REGISTRY=$(eval echo "$NPM_REGISTRY")
-
-
 bump_type=$(get_bump_type)
 
 if [[ -n "$bump_type" ]]; then
-  echo "ENV VARSSS"
-  echo "\$$NPM_REGISTRY"
-  echo "_+_________++++++++++"
-  echo "${D_NPM_REGISTRY}"
-  echo "END ECHO"
   npm version "$bump_type" -m "[skip ci] Upgrade to %s"
   npm shrinkwrap && npm ci
   { 
