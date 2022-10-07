@@ -33,7 +33,7 @@ if [[ -n "$bump_type" ]]; then
   } >> .npmrc
   cat .npmrc
   if [[ "$DRY_RUN" == "1" ]]; then
-    npm publish
+    npm publish --dry-run
   else
     git push && git push --tags
     npm publish
